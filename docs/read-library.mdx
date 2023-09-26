@@ -1,0 +1,126 @@
+---
+title: 什么是阅读库
+---
+
+import freButtons from './img/fre-buttons.png'
+
+当你第一次启动阅读助理时，你会看到两个按钮：
+
+- 打开库文件夹
+- 创建新库
+
+<img src={freButtons} width="360px"/>
+
+## 阅读库简述
+
+**阅读库**和计算机中已有的 `文档库`，`音乐库`，`视频库` 等类似，是用来存放专门数据的一个文件夹。对于阅读助理来说，**阅读库**就是应用的`工作区`。
+
+应用运行期间的大部分数据都会存放在阅读库中，你可以随意浏览。
+
+## 如何创建一个新库
+
+创建新库非常简单。
+
+1. 在文件管理器中创建一个新文件夹
+2. 在应用中点击 `创建新库`
+3. 选中新文件夹
+
+OK，你现在有了一个阅读库啦！
+
+## 云同步
+
+应用本身不提供云同步的功能，但是将阅读库分离出来后，我们可以借助 Windows 平台特性，将我们的阅读库创建在 `OneDrive` 或者其它云服务的本地文件夹中。
+
+当我们阅读库内的文件发生变动，这些云服务就会自然而然地同步啦。
+
+当你切换到另一台设备，只要启动了相同的云服务，那么就可以用阅读助理 `打开阅读库`，找到对应文件夹打开即可。
+
+## 库结构
+
+一个完整的阅读库是如下结构：
+
+```
+阅读库
+
+|   bookStore.db
+|   docEmbeddings.db
+|   pluginCache.json
+|   podcastStore.db
+|   rssStore.db
+|
++---LocalBooks
+|   \---covers
+|
++---OnlineBooks
+|
++---Plugins
+|
++---PodcastCache
+|   \---Local
+|           podcastCache.db
+|
++---RssCache
+|   \---Local
+|           rssCache.db
+|
+\---Styles
+        EpubAdditional.json
+```
+
+### bookStore.db
+
+这里存储着阅读库当前的书目信息，包括书架、历史记录等。
+
+### docEmbeddings.db
+
+这里存储着已经被转换成嵌入向量的 PDF 书籍信息，用于 PDF 中的 AI 问答。
+
+### podcastStore.db
+
+这里存储播客的单集播放记录。
+
+### rssStore.db
+
+这里存储收藏或者稍后阅读的 RSS 文章。
+
+### pluginCache.json
+
+这个是书源插件索引，里面有当前已导入的插件信息。
+
+### LocalBooks
+
+我们导入的书籍（TXT, EPUB, PDF）都会存放在这个目录。
+
+这个目录有一个子文件夹 `covers`，用来存放书籍封面图片。比如当我们导入一个 EPUB 图书时，如果该书存在封面，则会从书中抽出来，作为单独的图片文件存在这个目录下。
+
+### OnlineBooks
+
+在线书籍特指依赖书源获取内容的书籍，这里每本书的信息（书籍信息和目录）会被存成一个单独的 JSON 文件。
+
+### Plugins
+
+这里是书源插件目录，每个子文件夹都是一个插件。
+
+### PodcastCache
+
+播客的缓存目录，依据播客管理平台的不同将分作不同的目录存储。目前仅支持本地播客管理，所以只有一个 `Local` 子目录。
+
+其中的 `podcastCache.db` 存储当前播客源订阅的播客信息、分集信息等内容。
+
+### RssCache
+
+RSS 的缓存目录，依据订阅管理平台的不同将分作不同的目录存储。目前支持平台如下：
+
+- Local（本地管理）
+- Google Reader（支持 Google Reader 接口协议的平台，比如 FreshRSS）
+- Inoreader
+- NewsBlur
+- Feedbin
+
+不同的平台会在 `RssCache` 目录下创建不同的子目录，每个平台子目录下都有一个 `RssCache.db` 数据库，存储当前平台订阅的 RSS 源信息、缓存的文章、阅读历史等信息。
+
+### Styles
+
+这个文件夹比较特殊，不会自动创建，而是高级用户根据自己的需要优化阅读体验而创建的一个样式库。
+
+关于 `EpubAdditional.json` 的写法，可以参考 [自定义阅读体验](./custom-reader) 进行个性化定制。

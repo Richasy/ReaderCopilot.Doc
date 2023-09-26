@@ -1,0 +1,14 @@
+{
+  "version.label": {
+    "message": "下一个",
+    "description": "The label for version current"
+  },
+  "sidebar.docs.category.About Reader Copilot": {
+    "message": "关于阅读助理",
+    "description": "The label for category About Chaos Mesh in sidebar docs"
+  },
+  "sidebar.docs.category.Book Reader": {
+    "message": "读书",
+    "description": "The label for category About Chaos Mesh in sidebar docs"
+  }
+}
