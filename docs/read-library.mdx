@@ -1,46 +1,46 @@
 ---
-title: 什么是阅读库
+title: What is a Reading Library
 ---
 
 import freButtons from './img/fre-buttons.png'
 
-当你第一次启动阅读助理时，你会看到两个按钮：
+When you first start Reader Copilot, you will see two buttons:
 
-- 打开库文件夹
-- 创建新库
+- Open Library Folder
+- Create New Library
 
 <img src={freButtons} width="360px"/>
 
-## 阅读库简述
+## Overview of Reading Library
 
-**阅读库**和计算机中已有的 `文档库`，`音乐库`，`视频库` 等类似，是用来存放专门数据的一个文件夹。对于阅读助理来说，**阅读库**就是应用的`工作区`。
+Similar to existing libraries in computers such as Document Library, Music Library, Video Library, etc., a **Reading Library** is a folder used to store specific data. For Reader Copilot, the **Reading Library** is the application's workspace.
 
-应用运行期间的大部分数据都会存放在阅读库中，你可以随意浏览。
+Most of the data during the application's runtime will be stored in the Reading Library, which you can freely browse.
 
-## 如何创建一个新库
+## How to Create a New Library
 
-创建新库非常简单。
+Creating a new library is very simple.
 
-1. 在文件管理器中创建一个新文件夹
-2. 在应用中点击 `创建新库`
-3. 选中新文件夹
+1. Create a new folder in the file manager.
+2. Click on "Create New Library" in the application.
+3. Select the new folder.
 
-OK，你现在有了一个阅读库啦！
+OK, now you have a Reading Library!
 
-## 云同步
+## Cloud Sync
 
-应用本身不提供云同步的功能，但是将阅读库分离出来后，我们可以借助 Windows 平台特性，将我们的阅读库创建在 `OneDrive` 或者其它云服务的本地文件夹中。
+The application itself does not provide cloud sync functionality, but after separating the Reading Library, we can leverage the features of the Windows platform to create our Reading Library in a local folder of services like OneDrive or other cloud services.
 
-当我们阅读库内的文件发生变动，这些云服务就会自然而然地同步啦。
+When there are changes in the files within the Reading Library, these cloud services will naturally sync.
 
-当你切换到另一台设备，只要启动了相同的云服务，那么就可以用阅读助理 `打开阅读库`，找到对应文件夹打开即可。
+When you switch to another device, as long as you have launched the same cloud service, you can use Reader Copilot to "Open Reading Library" and find the corresponding folder to open.
 
-## 库结构
+## Library Structure
 
-一个完整的阅读库是如下结构：
+A complete Reading Library has the following structure:
 
 ```
-阅读库
+Reading Library
 
 |   bookStore.db
 |   docEmbeddings.db
@@ -69,58 +69,58 @@ OK，你现在有了一个阅读库啦！
 
 ### bookStore.db
 
-这里存储着阅读库当前的书目信息，包括书架、历史记录等。
+This stores the current book information in the Reading Library, including bookshelves, history records, etc.
 
 ### docEmbeddings.db
 
-这里存储着已经被转换成嵌入向量的 PDF 书籍信息，用于 PDF 中的 AI 问答。
+This stores the information of PDF books that have been converted into embedded vectors, used for AI question and answer in PDFs.
 
 ### podcastStore.db
 
-这里存储播客的单集播放记录。
+This stores the playback records of individual episodes of podcasts.
 
 ### rssStore.db
 
-这里存储收藏或者稍后阅读的 RSS 文章。
+This stores the RSS articles that have been bookmarked or marked for later reading.
 
 ### pluginCache.json
 
-这个是书源插件索引，里面有当前已导入的插件信息。
+This is the index of source plugins, containing information about the currently imported plugins.
 
 ### LocalBooks
 
-我们导入的书籍（TXT, EPUB, PDF）都会存放在这个目录。
+The books we import (TXT, EPUB, PDF) are stored in this directory.
 
-这个目录有一个子文件夹 `covers`，用来存放书籍封面图片。比如当我们导入一个 EPUB 图书时，如果该书存在封面，则会从书中抽出来，作为单独的图片文件存在这个目录下。
+This directory has a subfolder called "covers" used to store book cover images. For example, when we import an EPUB book, if the book has a cover, it will be extracted and saved as a separate image file in this directory.
 
 ### OnlineBooks
 
-在线书籍特指依赖书源获取内容的书籍，这里每本书的信息（书籍信息和目录）会被存成一个单独的 JSON 文件。
+Online books refer to books that rely on source plugins to obtain content. The information of each book (book information and table of contents) is stored as a separate JSON file here.
 
 ### Plugins
 
-这里是书源插件目录，每个子文件夹都是一个插件。
+This is the directory for source plugins, with each subfolder representing a plugin.
 
 ### PodcastCache
 
-播客的缓存目录，依据播客管理平台的不同将分作不同的目录存储。目前仅支持本地播客管理，所以只有一个 `Local` 子目录。
+This is the cache directory for podcasts, which is divided into different directories based on the podcast management platform. Currently, only local podcast management is supported, so there is only a "Local" subdirectory.
 
-其中的 `podcastCache.db` 存储当前播客源订阅的播客信息、分集信息等内容。
+The "podcastCache.db" file stores information about the subscribed podcasts, episode information, and other content of the current podcast source.
 
 ### RssCache
 
-RSS 的缓存目录，依据订阅管理平台的不同将分作不同的目录存储。目前支持平台如下：
+This is the cache directory for RSS, which is divided into different directories based on the subscription management platform. The supported platforms currently include:
 
-- Local（本地管理）
-- Google Reader（支持 Google Reader 接口协议的平台，比如 FreshRSS）
+- Local (local management)
+- Google Reader (platforms that support the Google Reader API protocol, such as FreshRSS)
 - Inoreader
 - NewsBlur
 - Feedbin
 
-不同的平台会在 `RssCache` 目录下创建不同的子目录，每个平台子目录下都有一个 `RssCache.db` 数据库，存储当前平台订阅的 RSS 源信息、缓存的文章、阅读历史等信息。
+Different platforms will create different subdirectories under "RssCache", and each platform subdirectory will have an "RssCache.db" database that stores information about the subscribed RSS sources, cached articles, reading history, and other information.
 
 ### Styles
 
-这个文件夹比较特殊，不会自动创建，而是高级用户根据自己的需要优化阅读体验而创建的一个样式库。
+This folder is special and will not be created automatically. It is a style library created by advanced users to optimize the reading experience according to their needs.
 
-关于 `EpubAdditional.json` 的写法，可以参考 [自定义阅读体验](./custom-reader) 进行个性化定制。
+For the format of "EpubAdditional.json", you can refer to [Customize Reading Experience](./custom-reader) for personalized customization.

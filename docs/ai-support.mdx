@@ -1,5 +1,5 @@
 ---
-title: AI 支持
+title: AI Support
 ---
 
 import copilotAuth from './img/fantasy-copilot-auth.png';
@@ -7,124 +7,121 @@ import wordTranslate from "./img/word-translate.png";
 import ttsSetting from './img/tts-setting.png';
 import pdfCopilot from "./img/pdf-copilot.png";
 
-阅读助理目前提供的 AI 功能都由 [小幻助理](https://www.microsoft.com/store/apps/9NB0NB3MLQTM) 提供。
-所以如果你想要在阅读中体验 AI 功能（翻译、朗读、对话），那么前置条件就是安装小幻助理。
+The AI features provided by Reader Copilot are currently powered by [Fantasy Copilot](https://www.microsoft.com/store/apps/9NB0NB3MLQTM). Therefore, if you want to experience AI features such as translation, text-to-speech, and chat while reading, the prerequisite is to install Fantasy Copilot.
 
-## 什么是小幻助理？
+## What is Fantasy Copilot?
 
-[小幻助理](https://www.microsoft.com/store/apps/9NB0NB3MLQTM) 是我开发的一款 AI 应用，它 **免费** 且 **开源**。
+[Fantasy Copilot](https://www.microsoft.com/store/apps/9NB0NB3MLQTM) is an AI application that I developed. It is **free** and **open-source**.
 
-- 开源地址：[Richasy/FantasyCopilot](https://github.com/Richasy/FantasyCopilot)
+- Open-source repository: [Richasy/FantasyCopilot](https://github.com/Richasy/FantasyCopilot)
 
-小幻助理支持目前主流的 Open AI 及 Azure Open AI，并且提供了丰富的 AI 集成体验。
+Fantasy Copilot supports mainstream Open AI and Azure Open AI, and provides a rich AI integration experience.
 
 :::tip
 
-小幻助理本身不是一种 AI 服务，所使用的各种 AI 功能都需要你自行配置（基本就是填密钥）。
+Fantasy Copilot itself is not an AI service. Various AI features used by the application need to be configured by the user (usually by entering an API key).
 
 :::
 
-除了提供基本的 AI 体验之外，我还打算将小幻助理变成 AI 核心，阅读助理 和 [哔哩助理](https://www.microsoft.com/store/apps/9MVFJLPH517M) 都是这个计划的一环。
+In addition to providing basic AI experiences, I also plan to turn Fantasy Copilot into an AI core. Reader Copilot and [Bili Copilot](https://www.microsoft.com/store/apps/9MVFJLPH517M) are part of this plan.
 
-我想打造一套 “助理工具包”，借此探索 AI 应用的开发路径。
+I want to create a "Copilot Toolkit" to explore the development path of AI applications.
 
-## 如何通过小幻助理提供 AI 服务？
+## How to Provide AI Services through Fantasy Copilot?
 
-阅读助理中所使用的 AI 功能：`翻译`，`朗读` 和 `对话`，在小幻助理中都有对应的功能。
+The AI features used in Reader Copilot, including translation, text-to-speech, and conversation, all have corresponding features in Fantasy Copilot.
 
-一个简单朴素的道理：
+There is a simple reason:
 
-> 如果已经在一个应用中进行了配置，为什么还需要再另一个应用中重新配置一遍？
+> If you have already configured something in one application, why do you need to configure it again in another application?
 
-所以阅读助理会直接读取小幻助理中的配置，并在不启动小幻助理的情况下为用户提供 AI 服务。
+Therefore, Reader Copilot directly reads the configuration from Fantasy Copilot and provides AI services to users without launching Fantasy Copilot.
 
-换句话说，小幻助理相当于一个额外的配置存储器，阅读助理会在需要的时候读取存储器中配置的密钥信息。
+In other words, Fantasy Copilot serves as an additional configuration storage, and Reader Copilot reads the key information from the storage when needed.
 
-不过本着对用户负责的态度，同时也为了避免这一机制被其他不良应用滥用，我进行了一些限制措施：
+However, in order to be responsible to users and to prevent this mechanism from being abused by other malicious applications, I have implemented some restrictions:
 
-1. 阅读助理第一次读取小幻助理配置时需要打开小幻助理进行授权验证。得到授权后，应用才能读取密钥信息。你可以随时在小幻助理的设置页面中取消对某个应用的授权。
+1. When Reader Copilot reads the configuration from Fantasy Copilot for the first time, it needs to open Fantasy Copilot for authorization verification. After obtaining authorization, the application can read the key information. You can cancel the authorization for a specific application at any time in the settings page of Fantasy Copilot.
    <img src={copilotAuth} height="200px" />
 
-2. 阅读助理只会在当前应用生命周期内持有密钥配置，不会保存密钥信息。应用只有在当前生命周期内第一次调用相关的 AI 功能时才会读取小幻助理的配置信息。
+2. Reader Copilot only holds the key configuration during the current application lifecycle and does not save the key information. The application only reads the configuration information from Fantasy Copilot when it calls the related AI features for the first time during the current lifecycle.
 
-## 关于翻译
+## About Translation
 
-在阅读助理中没有提供丰富的翻译语言选项，你只能把文本翻译成当前的应用语言。
+Reader Copilot does not provide a wide range of language options for translation. You can only translate the text into the current application language.
 
-绝大多数情况下，阅读时的翻译需求就是 `把不认识的语言文本翻译成我认识的`，而不是 `我想看看这段文本翻译成另一种语言是什么样子`。所以阅读助理提供的翻译选项只为满足 `能看懂` 这一基本需求。
+In most cases, the translation needs while reading are to "translate unfamiliar language text into a language I understand," rather than "I want to see what this text looks like when translated into another language." Therefore, the translation options provided by Reader Copilot are designed to meet the basic need of "being able to understand."
 
-应用提供了划词翻译，这一功能适用于所有文本阅读场景（在线书籍，EPUB，PDF 和 RSS）。
+The application provides word translation, which is suitable for all text reading scenarios (online books, EPUB, PDF, and RSS).
 
-选中文本后右键单击或者长按屏幕，即可弹出文本选择菜单，其中就有文本翻译选项，点击即可翻译。
-
+After selecting the text, right-click or long-press the screen to bring up the text selection menu, where you can find the text translation option. Click on it to translate.
 <img src={wordTranslate} height="200px" />
 
-### 全文翻译
+### Full Text Translation
 
-全文翻译功能仅在 RSS 阅读器中提供，这个功能的适用场景其实是在阅读非母语新闻/文章时的快速翻译。
+The full text translation feature is only available in the RSS reader. This feature is mainly designed for quickly translating non-native news/articles while reading.
 
-我们知道 RSS 的内容文本是 HTML，翻译 HTML 不可避免要带上一堆标签。这要求翻译服务在翻译的时候不能翻译标签内的内容，否则页面将无法正常显示。
+We know that the content text in RSS is in HTML format, and translating HTML inevitably includes a lot of tags. This requires the translation service to not translate the content inside the tags, otherwise, the page will not be displayed correctly.
 
-在这个方面，Azure Translator（必应翻译）是做得比较出色的，对网页翻译进行了充分的支持。
+In this regard, Azure Translator (Bing Translator) has done a good job and provides comprehensive support for webpage translation.
 
-反之，百度翻译在这一块就不尽如人意了，在其文档描述中也说了目前不支持网页翻译：
+On the other hand, Baidu Translate is not satisfactory in this aspect. Its documentation also states that webpage translation is currently not supported:
 
-> **如果我需要翻译整个网页，尖括号内的标签无法原样输出，怎么办？**
+> **If I need to translate the entire webpage, how can I preserve the tags inside angle brackets?**
 >
-> 翻译API会将传入的所有字符串当做可翻译字符，目前暂时无法区分哪些部分需原样保留，因此 API 不适合直接处理 HTML 文件。您可将 HTML 文件进行译前处理，抽取出待翻译文本，传入 API 翻译后再回填。
+> The translation API treats all incoming strings as translatable characters and cannot currently distinguish which parts need to be preserved as they are. Therefore, the API is not suitable for directly processing HTML files. You can preprocess the HTML file, extract the text to be translated, pass it to the API for translation, and then fill it back.
 >
 > <http://api.fanyi.baidu.com/doc/21>
 
-所以目前 RSS 中的全文翻译仅支持 Azure Translator，如果你没有在小幻助理中提供相应的配置，将无法使用全文翻译的功能。
+Therefore, the full text translation in RSS only supports Azure Translator. If you do not provide the corresponding configuration in Fantasy Copilot, you will not be able to use the full text translation feature.
 
 :::tip
 
-老实说，Azure 翻译服务真的挺实惠的，还有每月百万字的免费额度，简直可以说是白嫖了。
+To be honest, Azure Translation service is really cost-effective, and it even provides a free monthly quota of millions of words. It's like getting something for nothing.
 
 :::
 
-## 关于朗读
+## About Text-to-Speech
 
-Windows 本身提供文本转语音（TTS）的 API，可以免费且无限制地使用。缺点也很明显，就是机读味过重，在这种情况下听读简直是一种折磨。
+Windows itself provides an API for text-to-speech (TTS), which can be used for free and without limitations. However, the drawback is that the generated speech sounds robotic, which can be torturous when listening to it.
 
-***所以阅读助理没有提供本地 TTS 的支持，语音朗读将调用 Azure 语音服务***
+***Therefore, Reader Copilot does not support local TTS and instead utilizes Azure Speech Services for text-to-speech.***
 
-Azure 语音朗读服务提供的 AI 语音效果很不错，我们在短视频中经常听到的 **注意看！这个男人叫小帅！** 就是 Azure 中文的 `云希` 声音。
+Azure Speech Services provides excellent AI voice effects. The Chinese voice "云希" that we often hear in short videos is from Azure.
 
-它还支持如河南话、辽宁话等本地口音，在中文世界，Azure 语音服务是文本转语音的首选。
+It also supports local accents such as Henan dialect and Liaoning dialect. In the Chinese-speaking world, Azure Speech Services is the preferred choice for text-to-speech.
 
-和翻译类似，阅读助理在所有文本阅读场景中都提供了划词朗读的功能，你可以利用这一功能学习一些单词的发音。
+Similar to translation, Reader Copilot provides the function of text-to-speech for all text reading scenarios. You can use this function to learn the pronunciation of some words.
 
-应用为 TTS 提供了一些设置项，你可以在阅读器顶部的设置中调整需要朗读的语言和语音。
-
+The application provides some settings for TTS. You can adjust the language and voice for text-to-speech in the settings at the top of the reader.
 <img src={ttsSetting} height="200px" />
 
-### 全文朗读
+### Full Text-to-Speech
 
-全文朗读目前仅在在线阅读器中提供，且提供阅读完成自动切换下一章节的功能。
+The full text-to-speech feature is currently only available in the online reader and provides the function to automatically switch to the next chapter after reading. 
 
-为了能够降低语音生成的等待时间，应用会将文本按照自然段分开，一次只生成两段内容的语音，一段用于播放，一段进行准备。前一段放完，后一段接上，在播放期间生成下一段语音内容。
+In order to reduce the waiting time for speech generation, the application divides the text into natural paragraphs, generates speech for two paragraphs at a time, and plays one while preparing the next. When the previous paragraph finishes, the next paragraph starts playing. During playback, the application generates the next segment of speech content.
 
-这样做的好处显而易见，既照顾了用户体验，同时还减少了开支。如果你不想听了，可以随时停止，而不必担心后面的内容浪费（最多浪费一段语音）。
+The benefits of this approach are obvious. It takes care of the user experience while reducing costs. If you don't want to listen anymore, you can stop at any time without worrying about wasting the content that follows (at most one segment of speech).
 
-## 关于 AI 对话
+## About AI Conversation
 
-随着 ChatGPT 爆火，与之相关联的 AI 应用如雨后春笋般涌出，给传统应用领域注入了新鲜的血液。
+With the popularity of ChatGPT, AI applications associated with it have emerged in traditional application fields, injecting fresh blood into them.
 
-受到 ChatPDF 的启发，我也将 ChatGPT 集成进了阅读助理之中，而首选的使用场景就是 PDF 阅读。
+Inspired by ChatPDF, I have also integrated ChatGPT into Reader Copilot, with PDF reading being the preferred use case.
 
-鉴于 PDF 使用场景的特殊性，有很多学术论文或者资料会以 PDF 的形式存储（而且通常又长又费解），故而对于 AI 对话索引功能有着更强的需求。
+Considering the specific use cases of PDF, many academic papers or materials are stored in PDF format (often long and difficult to understand), which requires a stronger demand for AI conversation indexing.
 
 <img src={pdfCopilot} height="600px" />
 
-这个功能基本原理是，将 PDF 内所有文本抽取出来，然后分段转换成向量，然后将你的问题也转换成向量后进行余弦相似比较，找出最匹配的上下文，将上下文与你的问题一起发送给 ChatGPT，最终得到一个严谨的回答。
+The basic principle of this feature is to extract all the text from the PDF, convert it into vectors in segments, and then compare the cosine similarity between your question (also converted into a vector) and the context to find the most relevant context. The context and your question are then sent to ChatGPT to obtain a rigorous answer.
 
-但是这个功能也有局限性：
+However, this feature also has limitations:
 
-1. 相当一部分 PDF 是扫描本，本质上是图片而不是可以选择的文本，这种情况下，除非上 OCR，否则无法被解析。
-2. 很多 PDF 没有目录信息，导致难以将查询出的上下文与原有章节对应上，搜出来也不好定位。
-3. PDF 中有一部分内容需要借助排版才能更好地理解（比如网格、数据图谱），直接提取文字反而会造成误解。
+1. A considerable portion of PDFs are scanned copies, essentially images instead of selectable text. In this case, unless OCR is used, they cannot be parsed.
+2. Many PDFs do not have table of contents information, making it difficult to match the retrieved context with the original chapters, making it hard to locate.
+3. Some content in PDFs needs typesetting to be better understood (such as grids and data charts). Directly extracting text may cause misunderstandings.
 
-所以，目前的功能只能做到简单的问答，尚未提供清晰的语义搜索能力。
+Therefore, the current feature can only provide simple question-and-answer functionality and does not yet offer clear semantic search capabilities.
 
-有鉴于这种种限制，内置的对话功能可能对某些同学并不适用，所以应用也提供了设置项，你可以在设置页面中关闭助理的显示，眼不见心不烦。
+Due to these limitations, the built-in conversation feature may not be suitable for some users. Therefore, the application provides a setting where you can hide the assistant in the settings page, out of sight, out of mind.

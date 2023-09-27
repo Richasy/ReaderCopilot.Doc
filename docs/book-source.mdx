@@ -1,48 +1,48 @@
 ---
-title: 书源简介
+title: Introduction to Book Sources
 ---
 
 import pluginSetting from "./img/book-source-settings.png";
 import explore from "./img/book-explore.png";
 
-## 什么是书源？
+## What are Book Sources?
 
-简单来说，书源就是扩展书籍获取的渠道。
+Simply put, book sources are channels for obtaining books through extensions.
 
-大部分阅读器还是以本地书籍阅读为主，但对于某些文体（比如连载的网络小说），由于每日高强度的更新，本地书籍作为载体就不太合适了。
+Most readers still primarily read local books, but for certain genres (such as serialized web novels), due to the high intensity of daily updates, local books are not suitable as carriers.
 
-> *这位读者，你也不想每天都导入好几遍 txt 吧？*
+> *Dear reader, you don't want to import txt files every day, do you?*
 
-这样一来，在线书源就应运而生。它可以收集多个在线书籍来源，并在本地阅读，可以随时进行更新以获取最新章节，降低追更难度，避免读者在几个 app 中奔波。
+In this case, online book sources come into play. They can collect multiple online book sources and allow local reading, enabling real-time updates to obtain the latest chapters, reducing the difficulty of keeping up with updates, and avoiding readers from having to switch between multiple apps.
 
-书源需要手动编写，但我猜大部分用户应该不太会用编程方式来写书源。如果你喜欢阅读网文，那么我这里有一个 “热心网友” 写的网文书源：
+Book sources need to be manually written, but I guess most users are not familiar with programming to write book sources. If you enjoy reading online novels, I have a web novel book source written by a "enthusiastic netizen" here:
 
-- [下载地址](https://github.com/Richasy/ReaderCopilot.Public)
+- [Download Link](https://github.com/Richasy/ReaderCopilot.Public)
 
 :::warning
 
-阅读助理提供书源插件用于扩展功能，但是本身不提供书源制作服务，文中提及的书源插件仅供测试哟~
+Reader Copilot provides book source plugins to extend functionality, but it does not provide book source creation services. The book source plugins mentioned in this document are for testing purposes only~
 
 :::
 
-## 怎么导入？
+## How to Import?
 
-书源插件是一个后缀为 `.rcpkg` 的一个文件，实际上你把后缀名改成 `.zip` 后就能查看里面的内容了。
+A book source plugin is a file with the extension `.rcpkg`, and in fact, you can change the extension to `.zip` to view its contents.
 
-嗯……就是这么简单粗暴。
+Um... it's that simple and straightforward.
 
-现在，进入应用的设置界面，你能看到一个 `书源插件设置`。
+Now, go to the settings interface of the application, and you will see a "Book Source Plugin Settings".
 
 <img src={pluginSetting} width="380px" />
 
-点击 `导入书源插件`，选择刚刚下载的 `.rcpkg` 文件导入即可。
+Click "Import Book Source Plugin" and select the downloaded `.rcpkg` file to import it.
 
-导入完成后，你可以在 `书源插件` 里切换当前已有的插件。
+After importing, you can switch between the existing plugins in the "Book Source Plugin" section.
 
-## 怎么使用？
+## How to Use?
 
-一个插件里包含一个或多个书源，你可以进入 `网文浏览` 界面，切换不同的书源，浏览不同的信息，或者搜索书籍。
+A plugin contains one or more book sources. You can go to the "Web Novel Browser" interface, switch between different book sources, browse different information, or search for books.
 
 <img src={explore} width="400px" />
 
-单击书籍条目可以进入书籍详情，你可以点击目录中的章节进行预览，觉得 OK 就可以加入到书架之中。
+Clicking on a book entry will take you to the book details, where you can preview chapters in the table of contents. If you think it's okay, you can add it to your bookshelf.

@@ -1,5 +1,5 @@
 ---
-title: 自定义阅读体验
+title: Customized Reading Experience
 ---
 
 import onlineReader from './img/online-reader.png';
@@ -8,49 +8,49 @@ import epubReader from "./img/epub-reader.png";
 import pdfReader from "./img/pdf-reader.png";
 import textFlyout from "./img/text-selection-flyout.png";
 
-阅读助理支持三种阅读模式，也可以说是三种阅读器：
+Reader Copilot supports three reading modes, or we can say three types of readers:
 
-## 在线阅读
+## Online Reading
 
-这种阅读模式是纯文本阅读，符合标准的网文阅读体验，采用纵向滚动，一次只加载一章，在阅读完成后你可以手动切换到下一章节。
+This reading mode is for pure text reading, providing a standard online reading experience. It adopts vertical scrolling and loads one chapter at a time. After finishing reading, you can manually switch to the next chapter.
 
-在这种阅读模式下，你可以设置文本的`字号`、`字体`和`行高`，暂不支持调整背景色和前景色。
+In this reading mode, you can set the `font size`, `font style`, and `line height` of the text. Adjusting the background color and foreground color is not supported at the moment.
 
-由于内容简单，不涉及复杂排版，所以在线阅读模式提供了相对完整的朗读体验。
+Since the content is simple and does not involve complex typesetting, the online reading mode provides a relatively complete reading experience.
 
-目前，仅在线阅读时可以借助小幻助理朗读全文，并在读完后自动切换到下一章（默认开启）。
+Currently, only when reading online, you can use Fantasy Copilot to read the entire text and automatically switch to the next chapter after finishing reading (enabled by default).
 
 <img src={onlineReader} height="600px" />
 
-## Epub 阅读
+## Epub Reading
 
-Epub 的阅读体验基于 [epub.js](https://github.com/futurepress/epub.js) 构建。
+The reading experience of Epub is built on [epub.js](https://github.com/futurepress/epub.js).
 
-Epub 本质上是一堆 HTML 页面的组合，所以用浏览器来显示是最合适的。
+Epub is essentially a combination of HTML pages, so it is most suitable to display it in a browser.
 
-但是混合开发终究有些不太便利，故暂时未提供如在线阅读一般的全文朗读功能。但是基于网页的高度可定制特性，Epub 阅读器具备三种阅读模式中最高的自定义权限。
+However, hybrid development is somewhat inconvenient, so the full-text reading function, as provided in online reading, is temporarily not available. However, based on the highly customizable features of web-based applications, the Epub reader has the highest level of customization among the three reading modes.
 
-除了基础的字号、字体和行高之外，你还可以设置 **背景色** 与 **前景色** 。
+In addition to basic settings such as font size, font style, and line height, you can also set the **background color** and **foreground color**.
 
-如果你懂一些 css，你还可以添加附加样式，深度自定义阅读体验。
+If you know some CSS, you can add additional styles to deeply customize the reading experience.
 
 <img src={epubReader} height="600px" />
 
-### 附加样式
+### Additional Styles
 
-点击阅读器中间区域唤出顶部菜单，点击 `设置`，在弹出的设置菜单中展开 `阅读器颜色设置`，你就可以看到 `附加样式` 的设置选项了。
+Click the middle area of the reader to bring up the top menu, click on "Settings," and expand the "Reader Color Settings" in the pop-up menu. Then you can see the setting option for "Additional Styles."
 
 <img src={customStyle} width="320px"/>
 
-在默认编辑器中打开，你会发现在阅读库的 `Styles` 目录下创建了一个 `EpubAdditional.json` 文件。
+When opened in the default editor, you will find a "EpubAdditional.json" file created under the "Styles" directory of the reading library.
 
 :::tip
 
-这是一个 JSON 文件而不是 CSS！
+This is a JSON file, not CSS!
 
 :::
 
-这是一个代码示例：
+Here is a code example:
 
 ```json
 {
@@ -60,37 +60,37 @@ Epub 本质上是一堆 HTML 页面的组合，所以用浏览器来显示是最
 }
 ```
 
-上面这段代码将 epub 中的链接颜色都设置为了浅灰色。
+The above code sets the color of links in the Epub to light gray.
 
-之所以选择以这种 JSON 的形式定义样式，是因为这些样式代码将被直接注入到阅读器中，JSON 的形式更容易在 Javascript 中处理。
+The reason for defining styles in this JSON format is that these style codes will be directly injected into the reader, and the JSON format is easier to handle in JavaScript.
 
-## PDF 阅读
+## PDF Reading
 
-PDF 的阅读体验基于 [pdf.js](https://github.com/mozilla/pdf.js) 构建。
+The reading experience of PDF is built on [pdf.js](https://github.com/mozilla/pdf.js).
 
-PDF 阅读器相较于其它两种阅读器来说更为特殊，这种特殊性源于 PDF 这个格式本身。
+Compared to the other two readers, the PDF reader is more special, and this uniqueness comes from the PDF format itself.
 
-PDF 对排版的要求极为严格，以求在任何设备上显示一致。当对排版的要求达到了极致，那么通过代码获取的文本有时候就不那么可靠，所以全文朗读的功能将不会被引入到 PDF 阅读器中。
+PDF has extremely strict requirements for typesetting to ensure consistent display on any device. When the requirements for typesetting are pushed to the extreme, the reliability of the text obtained through code may be compromised. Therefore, the full-text reading function will not be introduced into the PDF reader.
 
-在 PDF 阅读器中，我们显然不能再去调整字体、字号等属性，不过我们却可以调整阅读布局。
+In the PDF reader, we obviously cannot adjust properties such as font and font size, but we can adjust the reading layout.
 
-应用提供了多种视图和滚动类型以供自由切换，必要情况下，你甚至可以旋转 PDF 内容。
+The application provides multiple views and scrolling types for free switching, and if necessary, you can even rotate the PDF content.
 
-当然，也支持自由放大缩小。
+Of course, free zooming is also supported.
 
 <img src={pdfReader} height="600px" />
 
-> PDF 阅读器有自己的特殊功能：AI 对话，详情请见 [AI 支持](./ai-support)
+> The PDF reader has its own special feature: AI dialogue. For details, please refer to [AI Support](./ai-support).
 
-## 划词菜单
+## Text Selection Menu
 
-三种阅读器都支持文本选中菜单，且提供的功能是一致的。
+All three readers support text selection menus, and the provided functions are consistent.
 
-选中文本后，单击右键（或者长按屏幕）即可唤出文本选择菜单：
+After selecting text, right-click (or long-press on the screen) to bring up the text selection menu:
 
 <img src={textFlyout} width="360px" />
 
-- **复制**：复制选中文本。
-- **在网页中搜索**：打开浏览器搜索选中内容，默认搜索引擎可以在设置页面中调整。
-- **翻译文本**：借助小幻助理，应用会将选中文本翻译成当前应用语言（图中是简体中文）。
-- **小幻朗读**：通过小幻助理，将选中文本转换成自然语音（更贴合真人声音）并朗读。
+- **Copy**: Copy the selected text.
+- **Search on the web**: Open the browser to search for the selected content. The default search engine can be adjusted in the settings page.
+- **Translate text**: With the help of Fantasy Copilot, the application will translate the selected text into the current application language (Simplified Chinese in the image).
+- **Fantasy Read**: Through Fantasy Copilot, convert the selected text into natural speech (more similar to human voice) and read it aloud.
