@@ -140,7 +140,7 @@ const config = {
             items: [
               {
                 html: `<p align="left">
-                <a title="Get From Microsoft Store" href="https://www.microsoft.com/store/apps/9MVFJLPH517M?launch=true&mode=full" target="_blank">
+                <a title="Get From Microsoft Store" href="https://www.microsoft.com/store/apps/9PFZCKRHW0BC?launch=true&mode=full" target="_blank">
                   <picture>
                     <source srcset="https://get.microsoft.com/images/en-US%20light.svg" media="(prefers-color-scheme: dark)" />
                     <source srcset="https://get.microsoft.com/images/en-US%20dark.svg" media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)" /><img src="https://get.microsoft.com/images/en-US%20dark.svg" width=144 />
