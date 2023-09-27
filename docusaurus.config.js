@@ -96,16 +96,12 @@ const config = {
             title: 'Documentation',
             items: [
               {
-                label: 'Configuration',
-                to: '/docs/configuration',
-              },
-              {
-                label: 'Book source plugin',
-                to: '/docs/book-source-plugin',
+                label: 'Book source',
+                to: '/docs/book-source',
               },
               {
                 label: 'AI capabilities',
-                to: '/docs/ai-capabilities',
+                to: '/docs/ai-support',
               }
             ],
           },
