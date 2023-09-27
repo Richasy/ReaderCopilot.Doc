@@ -1,0 +1,96 @@
+---
+title: Customized Reading Experience
+---
+
+import onlineReader from './img/online-reader.png';
+import customStyle from "./img/epub-customStyle.png";
+import epubReader from "./img/epub-reader.png";
+import pdfReader from "./img/pdf-reader.png";
+import textFlyout from "./img/text-selection-flyout.png";
+
+Reader Copilot supports three reading modes, or we can say three types of readers:
+
+## Online Reading
+
+This reading mode is for pure text reading, providing a standard online reading experience. It adopts vertical scrolling and loads one chapter at a time. After finishing reading, you can manually switch to the next chapter.
+
+In this reading mode, you can set the `font size`, `font style`, and `line height` of the text. Adjusting the background color and foreground color is not supported at the moment.
+
+Since the content is simple and does not involve complex typesetting, the online reading mode provides a relatively complete reading experience.
+
+Currently, only when reading online, you can use Fantasy Copilot to read the entire text and automatically switch to the next chapter after finishing reading (enabled by default).
+
+<img src={onlineReader} height="600px" />
+
+## Epub Reading
+
+The reading experience of Epub is built on [epub.js](https://github.com/futurepress/epub.js).
+
+Epub is essentially a combination of HTML pages, so it is most suitable to display it in a browser.
+
+However, hybrid development is somewhat inconvenient, so the full-text reading function, as provided in online reading, is temporarily not available. However, based on the highly customizable features of web-based applications, the Epub reader has the highest level of customization among the three reading modes.
+
+In addition to basic settings such as font size, font style, and line height, you can also set the **background color** and **foreground color**.
+
+If you know some CSS, you can add additional styles to deeply customize the reading experience.
+
+<img src={epubReader} height="600px" />
+
+### Additional Styles
+
+Click the middle area of the reader to bring up the top menu, click on "Settings," and expand the "Reader Color Settings" in the pop-up menu. Then you can see the setting option for "Additional Styles."
+
+<img src={customStyle} width="320px"/>
+
+When opened in the default editor, you will find a "EpubAdditional.json" file created under the "Styles" directory of the reading library.
+
+:::tip
+
+This is a JSON file, not CSS!
+
+:::
+
+Here is a code example:
+
+```json
+{
+    "a": {
+        "color": "#eeeeee"
+    }
+}
+```
+
+The above code sets the color of links in the Epub to light gray.
+
+The reason for defining styles in this JSON format is that these style codes will be directly injected into the reader, and the JSON format is easier to handle in JavaScript.
+
+## PDF Reading
+
+The reading experience of PDF is built on [pdf.js](https://github.com/mozilla/pdf.js).
+
+Compared to the other two readers, the PDF reader is more special, and this uniqueness comes from the PDF format itself.
+
+PDF has extremely strict requirements for typesetting to ensure consistent display on any device. When the requirements for typesetting are pushed to the extreme, the reliability of the text obtained through code may be compromised. Therefore, the full-text reading function will not be introduced into the PDF reader.
+
+In the PDF reader, we obviously cannot adjust properties such as font and font size, but we can adjust the reading layout.
+
+The application provides multiple views and scrolling types for free switching, and if necessary, you can even rotate the PDF content.
+
+Of course, free zooming is also supported.
+
+<img src={pdfReader} height="600px" />
+
+> The PDF reader has its own special feature: AI dialogue. For details, please refer to [AI Support](./ai-support).
+
+## Text Selection Menu
+
+All three readers support text selection menus, and the provided functions are consistent.
+
+After selecting text, right-click (or long-press on the screen) to bring up the text selection menu:
+
+<img src={textFlyout} width="360px" />
+
+- **Copy**: Copy the selected text.
+- **Search on the web**: Open the browser to search for the selected content. The default search engine can be adjusted in the settings page.
+- **Translate text**: With the help of Fantasy Copilot, the application will translate the selected text into the current application language (Simplified Chinese in the image).
+- **Fantasy Read**: Through Fantasy Copilot, convert the selected text into natural speech (more similar to human voice) and read it aloud.

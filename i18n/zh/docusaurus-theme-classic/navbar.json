@@ -1,0 +1,14 @@
+{
+  "title": {
+    "message": "阅读助理",
+    "description": "The title in the navbar"
+  },
+  "item.label.Documentation": {
+    "message": "文档",
+    "description": "Navbar item with label Documentation"
+  },
+  "item.label.Download": {
+    "message": "下载",
+    "description": "Navbar item with label Download"
+  }
+}

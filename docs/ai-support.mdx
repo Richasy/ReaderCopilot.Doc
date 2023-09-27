@@ -1,0 +1,127 @@
+---
+title: AI Support
+---
+
+import copilotAuth from './img/fantasy-copilot-auth.png';
+import wordTranslate from "./img/word-translate.png";
+import ttsSetting from './img/tts-setting.png';
+import pdfCopilot from "./img/pdf-copilot.png";
+
+The AI features provided by Reader Copilot are currently powered by [Fantasy Copilot](https://www.microsoft.com/store/apps/9NB0NB3MLQTM). Therefore, if you want to experience AI features such as translation, text-to-speech, and chat while reading, the prerequisite is to install Fantasy Copilot.
+
+## What is Fantasy Copilot?
+
+[Fantasy Copilot](https://www.microsoft.com/store/apps/9NB0NB3MLQTM) is an AI application that I developed. It is **free** and **open-source**.
+
+- Open-source repository: [Richasy/FantasyCopilot](https://github.com/Richasy/FantasyCopilot)
+
+Fantasy Copilot supports mainstream Open AI and Azure Open AI, and provides a rich AI integration experience.
+
+:::tip
+
+Fantasy Copilot itself is not an AI service. Various AI features used by the application need to be configured by the user (usually by entering an API key).
+
+:::
+
+In addition to providing basic AI experiences, I also plan to turn Fantasy Copilot into an AI core. Reader Copilot and [Bili Copilot](https://www.microsoft.com/store/apps/9MVFJLPH517M) are part of this plan.
+
+I want to create a "Copilot Toolkit" to explore the development path of AI applications.
+
+## How to Provide AI Services through Fantasy Copilot?
+
+The AI features used in Reader Copilot, including translation, text-to-speech, and conversation, all have corresponding features in Fantasy Copilot.
+
+There is a simple reason:
+
+> If you have already configured something in one application, why do you need to configure it again in another application?
+
+Therefore, Reader Copilot directly reads the configuration from Fantasy Copilot and provides AI services to users without launching Fantasy Copilot.
+
+In other words, Fantasy Copilot serves as an additional configuration storage, and Reader Copilot reads the key information from the storage when needed.
+
+However, in order to be responsible to users and to prevent this mechanism from being abused by other malicious applications, I have implemented some restrictions:
+
+1. When Reader Copilot reads the configuration from Fantasy Copilot for the first time, it needs to open Fantasy Copilot for authorization verification. After obtaining authorization, the application can read the key information. You can cancel the authorization for a specific application at any time in the settings page of Fantasy Copilot.
+   <img src={copilotAuth} height="200px" />
+
+2. Reader Copilot only holds the key configuration during the current application lifecycle and does not save the key information. The application only reads the configuration information from Fantasy Copilot when it calls the related AI features for the first time during the current lifecycle.
+
+## About Translation
+
+Reader Copilot does not provide a wide range of language options for translation. You can only translate the text into the current application language.
+
+In most cases, the translation needs while reading are to "translate unfamiliar language text into a language I understand," rather than "I want to see what this text looks like when translated into another language." Therefore, the translation options provided by Reader Copilot are designed to meet the basic need of "being able to understand."
+
+The application provides word translation, which is suitable for all text reading scenarios (online books, EPUB, PDF, and RSS).
+
+After selecting the text, right-click or long-press the screen to bring up the text selection menu, where you can find the text translation option. Click on it to translate.
+<img src={wordTranslate} height="200px" />
+
+### Full Text Translation
+
+The full text translation feature is only available in the RSS reader. This feature is mainly designed for quickly translating non-native news/articles while reading.
+
+We know that the content text in RSS is in HTML format, and translating HTML inevitably includes a lot of tags. This requires the translation service to not translate the content inside the tags, otherwise, the page will not be displayed correctly.
+
+In this regard, Azure Translator (Bing Translator) has done a good job and provides comprehensive support for webpage translation.
+
+On the other hand, Baidu Translate is not satisfactory in this aspect. Its documentation also states that webpage translation is currently not supported:
+
+> **If I need to translate the entire webpage, how can I preserve the tags inside angle brackets?**
+>
+> The translation API treats all incoming strings as translatable characters and cannot currently distinguish which parts need to be preserved as they are. Therefore, the API is not suitable for directly processing HTML files. You can preprocess the HTML file, extract the text to be translated, pass it to the API for translation, and then fill it back.
+>
+> <http://api.fanyi.baidu.com/doc/21>
+
+Therefore, the full text translation in RSS only supports Azure Translator. If you do not provide the corresponding configuration in Fantasy Copilot, you will not be able to use the full text translation feature.
+
+:::tip
+
+To be honest, Azure Translation service is really cost-effective, and it even provides a free monthly quota of millions of words. It's like getting something for nothing.
+
+:::
+
+## About Text-to-Speech
+
+Windows itself provides an API for text-to-speech (TTS), which can be used for free and without limitations. However, the drawback is that the generated speech sounds robotic, which can be torturous when listening to it.
+
+***Therefore, Reader Copilot does not support local TTS and instead utilizes Azure Speech Services for text-to-speech.***
+
+Azure Speech Services provides excellent AI voice effects. The Chinese voice "云希" that we often hear in short videos is from Azure.
+
+It also supports local accents such as Henan dialect and Liaoning dialect. In the Chinese-speaking world, Azure Speech Services is the preferred choice for text-to-speech.
+
+Similar to translation, Reader Copilot provides the function of text-to-speech for all text reading scenarios. You can use this function to learn the pronunciation of some words.
+
+The application provides some settings for TTS. You can adjust the language and voice for text-to-speech in the settings at the top of the reader.
+<img src={ttsSetting} height="200px" />
+
+### Full Text-to-Speech
+
+The full text-to-speech feature is currently only available in the online reader and provides the function to automatically switch to the next chapter after reading. 
+
+In order to reduce the waiting time for speech generation, the application divides the text into natural paragraphs, generates speech for two paragraphs at a time, and plays one while preparing the next. When the previous paragraph finishes, the next paragraph starts playing. During playback, the application generates the next segment of speech content.
+
+The benefits of this approach are obvious. It takes care of the user experience while reducing costs. If you don't want to listen anymore, you can stop at any time without worrying about wasting the content that follows (at most one segment of speech).
+
+## About AI Conversation
+
+With the popularity of ChatGPT, AI applications associated with it have emerged in traditional application fields, injecting fresh blood into them.
+
+Inspired by ChatPDF, I have also integrated ChatGPT into Reader Copilot, with PDF reading being the preferred use case.
+
+Considering the specific use cases of PDF, many academic papers or materials are stored in PDF format (often long and difficult to understand), which requires a stronger demand for AI conversation indexing.
+
+<img src={pdfCopilot} height="600px" />
+
+The basic principle of this feature is to extract all the text from the PDF, convert it into vectors in segments, and then compare the cosine similarity between your question (also converted into a vector) and the context to find the most relevant context. The context and your question are then sent to ChatGPT to obtain a rigorous answer.
+
+However, this feature also has limitations:
+
+1. A considerable portion of PDFs are scanned copies, essentially images instead of selectable text. In this case, unless OCR is used, they cannot be parsed.
+2. Many PDFs do not have table of contents information, making it difficult to match the retrieved context with the original chapters, making it hard to locate.
+3. Some content in PDFs needs typesetting to be better understood (such as grids and data charts). Directly extracting text may cause misunderstandings.
+
+Therefore, the current feature can only provide simple question-and-answer functionality and does not yet offer clear semantic search capabilities.
+
+Due to these limitations, the built-in conversation feature may not be suitable for some users. Therefore, the application provides a setting where you can hide the assistant in the settings page, out of sight, out of mind.

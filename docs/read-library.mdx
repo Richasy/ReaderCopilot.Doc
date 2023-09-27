@@ -1,0 +1,126 @@
+---
+title: What is a Reading Library
+---
+
+import freButtons from './img/fre-buttons.png'
+
+When you first start Reader Copilot, you will see two buttons:
+
+- Open Library Folder
+- Create New Library
+
+<img src={freButtons} width="360px"/>
+
+## Overview of Reading Library
+
+Similar to existing libraries in computers such as Document Library, Music Library, Video Library, etc., a **Reading Library** is a folder used to store specific data. For Reader Copilot, the **Reading Library** is the application's workspace.
+
+Most of the data during the application's runtime will be stored in the Reading Library, which you can freely browse.
+
+## How to Create a New Library
+
+Creating a new library is very simple.
+
+1. Create a new folder in the file manager.
+2. Click on "Create New Library" in the application.
+3. Select the new folder.
+
+OK, now you have a Reading Library!
+
+## Cloud Sync
+
+The application itself does not provide cloud sync functionality, but after separating the Reading Library, we can leverage the features of the Windows platform to create our Reading Library in a local folder of services like OneDrive or other cloud services.
+
+When there are changes in the files within the Reading Library, these cloud services will naturally sync.
+
+When you switch to another device, as long as you have launched the same cloud service, you can use Reader Copilot to "Open Reading Library" and find the corresponding folder to open.
+
+## Library Structure
+
+A complete Reading Library has the following structure:
+
+```
+Reading Library
+
+|   bookStore.db
+|   docEmbeddings.db
+|   pluginCache.json
+|   podcastStore.db
+|   rssStore.db
+|
++---LocalBooks
+|   \---covers
+|
++---OnlineBooks
+|
++---Plugins
+|
++---PodcastCache
+|   \---Local
+|           podcastCache.db
+|
++---RssCache
+|   \---Local
+|           rssCache.db
+|
+\---Styles
+        EpubAdditional.json
+```
+
+### bookStore.db
+
+This stores the current book information in the Reading Library, including bookshelves, history records, etc.
+
+### docEmbeddings.db
+
+This stores the information of PDF books that have been converted into embedded vectors, used for AI question and answer in PDFs.
+
+### podcastStore.db
+
+This stores the playback records of individual episodes of podcasts.
+
+### rssStore.db
+
+This stores the RSS articles that have been bookmarked or marked for later reading.
+
+### pluginCache.json
+
+This is the index of source plugins, containing information about the currently imported plugins.
+
+### LocalBooks
+
+The books we import (TXT, EPUB, PDF) are stored in this directory.
+
+This directory has a subfolder called "covers" used to store book cover images. For example, when we import an EPUB book, if the book has a cover, it will be extracted and saved as a separate image file in this directory.
+
+### OnlineBooks
+
+Online books refer to books that rely on source plugins to obtain content. The information of each book (book information and table of contents) is stored as a separate JSON file here.
+
+### Plugins
+
+This is the directory for source plugins, with each subfolder representing a plugin.
+
+### PodcastCache
+
+This is the cache directory for podcasts, which is divided into different directories based on the podcast management platform. Currently, only local podcast management is supported, so there is only a "Local" subdirectory.
+
+The "podcastCache.db" file stores information about the subscribed podcasts, episode information, and other content of the current podcast source.
+
+### RssCache
+
+This is the cache directory for RSS, which is divided into different directories based on the subscription management platform. The supported platforms currently include:
+
+- Local (local management)
+- Google Reader (platforms that support the Google Reader API protocol, such as FreshRSS)
+- Inoreader
+- NewsBlur
+- Feedbin
+
+Different platforms will create different subdirectories under "RssCache", and each platform subdirectory will have an "RssCache.db" database that stores information about the subscribed RSS sources, cached articles, reading history, and other information.
+
+### Styles
+
+This folder is special and will not be created automatically. It is a style library created by advanced users to optimize the reading experience according to their needs.
+
+For the format of "EpubAdditional.json", you can refer to [Customize Reading Experience](./custom-reader) for personalized customization.
