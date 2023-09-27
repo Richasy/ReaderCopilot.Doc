@@ -5,10 +5,18 @@
   },
   "sidebar.docs.category.About Reader Copilot": {
     "message": "关于阅读助理",
-    "description": "The label for category About Chaos Mesh in sidebar docs"
+    "description": "The label for category Reader Copilot in sidebar docs"
   },
   "sidebar.docs.category.Book Reader": {
     "message": "读书",
-    "description": "The label for category About Chaos Mesh in sidebar docs"
+    "description": "The label for category Book Reader in sidebar docs"
+  },
+  "sidebar.docs.category.Rss Reader": {
+    "message": "RSS 阅读",
+    "description": "The label for category Rss Reader in sidebar docs"
+  },
+  "sidebar.docs.category.Podcast": {
+    "message": "播客",
+    "description": "The label for category Podcast in sidebar docs"
   }
 }

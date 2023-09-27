@@ -17,12 +17,22 @@ const sidebars = {
     {
       type: 'category',
       label: 'About Reader Copilot',
-      items: ['intro', 'read-library'],
+      items: ['intro', 'read-library', 'ai-support'],
     },
     {
       type: 'category',
       label: 'Book Reader',
-      items: ['import-txt', 'custom-reader']
+      items: ['import-txt', 'book-management', 'custom-reader', 'book-source', 'write-plugin']
+    },
+    {
+      type: 'category',
+      label: 'Rss Reader',
+      items: ['rss-overview']
+    },
+    {
+      type: 'category',
+      label: 'Podcast',
+      items: ['podcast-overview']
     }
   ]
 };
