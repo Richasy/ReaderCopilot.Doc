@@ -96,6 +96,10 @@ const config = {
             title: 'Documentation',
             items: [
               {
+                label: 'Privacy',
+                to: '/docs/privacy',
+              },
+              {
                 label: 'Book source',
                 to: '/docs/book-source',
               },

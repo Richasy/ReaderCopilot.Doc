@@ -19,6 +19,10 @@
     "message": "书源",
     "description": "The label of footer link with label=Supported features linking to /docs/features"
   },
+  "link.item.label.Privacy": {
+    "message": "隐私许可",
+    "description": "The label of footer link with label=Supported features linking to /docs/features"
+  },
   "link.item.label.AI capabilities": {
     "message": "AI 功能",
     "description": "The label of footer link with label=AI capabilities linking to /docs/ai-capabilities"
