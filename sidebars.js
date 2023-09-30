@@ -27,7 +27,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Rss Reader',
-      items: ['rss-overview']
+      items: ['rss-overview', 'rss-connect']
     },
     {
       type: 'category',

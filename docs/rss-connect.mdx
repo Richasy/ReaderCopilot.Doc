@@ -1,0 +1,81 @@
+---
+title: Connect to RSS Services
+---
+
+import gReaderAuth from "./img/greader_auth.png";
+
+## Supported Platforms
+
+App supports the following platforms:
+
+- Local (Local Management)
+- Google Reader (Platforms that support the Google Reader API protocol, such as [FreshRSS](https://www.freshrss.org))
+- [Inoreader](https://www.inoreader.com)
+- [NewsBlur](https://www.newsblur.com)
+- [Feedbin](https://feedbin.com)
+
+## Local Management
+
+Local management is the most convenient option as it does not require additional authorization. The app will create an RSS cache in the reading library.
+
+When refreshing the subscription sources, old articles will not be deleted and will be kept indefinitely.
+
+You can achieve cross-device synchronization by placing the reading library in a local cloud drive such as OneDrive.
+
+## Google Reader
+
+Google Reader has been discontinued, but the Google Reader API is still used by various RSS platforms, such as FreshRSS and Inoreader.
+
+Let's take FreshRSS as an example.
+
+<img src={gReaderAuth} width="340px" />
+
+- **Server**: Refers to the Google Reader API address of your deployed FreshRSS service, usually `https://yourFreshRSSdeploymentURL/api/greader.php`
+- **Username**: Your registered username in FreshRSS
+- **Password**: The corresponding password
+
+Please note that if you are deploying for the first time, you also need to check the "Allow API Access" option in the "Authentication" module of FreshRSS settings.
+
+## Inoreader
+
+Inoreader is an online RSS service provider and is considered a veteran service with stable quality. However, they have recently started restricting the use of third-party APIs.
+
+Data interaction with Inoreader's API is a paid feature. If you are already a PRO user, you can create your own application in Inoreader's "Preferences" -> "Other" -> "API Access Permissions" and then fill in the "Application ID" and "Application Key" in the application window.
+Next, complete the authorization steps in your browser.
+
+If you are a free user, you can still use Inoreader.
+
+Inoreader provides a PRO trial, where you can try it for two weeks. During the trial period, you can follow the steps above to achieve synchronization with Inoreader.
+
+If you have previously used the PRO trial, currently, unless you are willing to purchase Inoreader's PRO package, you can only export it as OPML and use local mode to read RSS in the app.
+
+:::tip
+
+This is the current situation, but there are also future plans:
+
+1. If App receives positive feedback and there is a significant number of users who prefer to use Inoreader, I will negotiate with Inoreader to try to obtain an application quota.
+2. If the first option is not feasible, assuming there are a sufficient number of paid users, I can personally maintain a PRO account (the basic PRO account can only have 100 requests per day, suitable for personal use, creating a public account for multiple users requires additional paid upgrades and qualification verification).
+
+:::
+
+## NewsBlur
+
+NewsBlur is also a veteran RSS service provider and provides a comprehensive API interface.
+
+Simply enter your account password to log in and synchronize with NewsBlur.
+
+However, it should be noted that NewsBlur does not provide certain features or the mechanisms may differ from app's existing management mechanisms.
+
+These operations need to be performed in NewsBlur (e.g., deleting groups).
+
+## Feedbin
+
+Feedbin is a relatively new RSS service provider that supports basic RSS reading and subscription source management through its API.
+
+Typically, Feedbin has its own official sources, which are fast and stable.
+
+However, if you have your own deployed Feedbin, you can replace the server with your API address.
+
+## Unsupported Platforms
+
+- [Feedly](https://feedly.com/): Popular, high-quality, and the most comprehensive, but has the strictest API restrictions. App currently does not have the qualifications to apply for an API.

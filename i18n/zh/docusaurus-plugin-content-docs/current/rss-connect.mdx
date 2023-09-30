@@ -1,0 +1,81 @@
+---
+title: 连接到 RSS 服务
+---
+
+import gReaderAuth from "./img/greader_auth.png";
+
+## 支持平台
+
+阅读助理支持以下平台：
+
+- Local（本地管理）
+- Google Reader（支持 Google Reader 接口协议的平台，比如 [FreshRSS](https://www.freshrss.org)）
+- [Inoreader](https://www.inoreader.com)
+- [NewsBlur](https://www.newsblur.com)
+- [Feedbin](https://feedbin.com)
+
+## 本地管理
+
+本地管理最为方便，不需要额外授权，应用将会在阅读库中创建 RSS 缓存。
+
+在刷新的订阅源的时候，旧的文章不会被删除，而是会一直保留。
+
+可以通过将阅读库放置在如 OneDrive 等本地云盘中以实现跨设备同步。
+
+## Google Reader
+
+Google Reader 已经停运，但是 Google Reader API 作为一种协议却被多种 RSS 平台使用，典型的如 FreshRSS，Inoreader 等。
+
+以 FreshRSS 举例。
+
+<img src={gReaderAuth} width="340px" />
+
+- **服务器**：指你部署的 FreshRSS 服务的 Google Reader API 地址，通常是：`https://你的FreshRSS部署网址/api/greader.php`
+- **用户名**：你在 FreshRSS 中注册的用户名
+- **密码**：对应的密码
+
+需要注意的是，如果你是第一次部署，你还需要在 FreshRSS 的设置中的 `认证` 模块，勾选 `允许 API 访问`。
+
+## Inoreader
+
+Inoreader 是一个在线 RSS 服务提供商，算是老牌服务了，质量稳定，但是近期已经开始约束第三方 API 的使用。
+
+Inoreader 的 API 数据交互是一项付费功能，如果你已经是一位 PRO 用户，那么可以在 Inoreader 的 `偏好设置` -> `其它` -> `API 访问权限` 中创建自己的应用，然后将 `应用程序 ID` 和 `应用程序密钥` 填写到应用窗口中，
+接下来完成在浏览器中的授权步骤即可。
+
+如果你是免费用户，也不是不能用。
+
+Inoreader 提供了 PRO 试用的入口，你可以先进行两周的试用。在试用期间，你可以按照上面的步骤进行，以实现和 Inoreader 的同步。
+
+如果你之前已经使用了 PRO 的试用，那么目前来说，除非你愿意购买 Inoreader 的 PRO 套餐，不然只能导出成 OPML 之后，在阅读助理中使用本地模式阅读 RSS 了。
+
+:::tip
+
+这是目前的情况，但也有后续的计划：
+
+1. 如果阅读助理的反响不错，有比较多的用户倾向于使用 Inoreader，我会去和 Inoreader 协商，尽量争取一个应用名额。
+2. 如果第一条路不行，那么假设付费用户较多，我可以自掏腰包维护一个 PRO 账户（基础的 PRO 账户每天只能有 100 次请求，适合个人使用，做公开账户给多人使用需要额外升级付费，还需要验证资质）
+
+:::
+
+## NewsBlur
+
+NewsBlur 也是一个老牌 RSS 服务提供商，且提供了完善的 API 接口。
+
+输入你的账户密码即可登录，与 NewsBlur 同步。
+
+但需要说明的是，有些功能 NewsBlur 并没有提供，或者说机制与 阅读助理 现有管理机制不一样。
+
+这部分操作需要到 NewsBlur 中进行（比如删除分组）
+
+## Feedbin
+
+Feedbin 是一个较新的 RSS 服务提供商，API 支持基础的 RSS 阅读及订阅源管理。
+
+通常来说，Feedbin 有自己的官方源，速度快且较为稳定。
+
+但是如果你有自己部署的 Feedbin，也可以将服务器替换为你的 API 地址。
+
+## 不支持的平台
+
+- [Feedly](https://feedly.com/)：热门，质量高，综合能力最强，但对 API 的限制最严格。阅读助理目前不具备申请 API 的资质。
