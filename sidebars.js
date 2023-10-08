@@ -17,7 +17,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'About Reader Copilot',
-      items: ['intro', 'read-library', 'ai-support'],
+      items: ['intro', 'read-library', 'ai-support', 'release-note'],
     },
     {
       type: 'category',

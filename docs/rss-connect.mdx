@@ -13,6 +13,7 @@ App supports the following platforms:
 - [Inoreader](https://www.inoreader.com)
 - [NewsBlur](https://www.newsblur.com)
 - [Feedbin](https://feedbin.com)
+- [Miniflux](https://miniflux.app)
 
 ## Local Management
 
@@ -38,25 +39,13 @@ Please note that if you are deploying for the first time, you also need to check
 
 ## Inoreader
 
-Inoreader is an online RSS service provider and is considered a veteran service with stable quality. However, they have recently started restricting the use of third-party APIs.
+Inoreader is an online RSS service provider, which is considered a veteran service with stable quality.
 
-Data interaction with Inoreader's API is a paid feature. If you are already a PRO user, you can create your own application in Inoreader's "Preferences" -> "Other" -> "API Access Permissions" and then fill in the "Application ID" and "Application Key" in the application window.
-Next, complete the authorization steps in your browser.
+The application inherits the client token for **RSS Track** and has obtained recognition from Inoreader official. It will continue to provide high-quality Inoreader integration services for the Windows platform.
 
-If you are a free user, you can still use Inoreader.
+You can switch to Inoreader in the settings, click the `Connect` button, and the application will open a browser. You need to complete the authorization in the browser, and the browser will guide you to open the reading assistant, thus completing the authorization.
 
-Inoreader provides a PRO trial, where you can try it for two weeks. During the trial period, you can follow the steps above to achieve synchronization with Inoreader.
-
-If you have previously used the PRO trial, currently, unless you are willing to purchase Inoreader's PRO package, you can only export it as OPML and use local mode to read RSS in the app.
-
-:::tip
-
-This is the current situation, but there are also future plans:
-
-1. If App receives positive feedback and there is a significant number of users who prefer to use Inoreader, I will negotiate with Inoreader to try to obtain an application quota.
-2. If the first option is not feasible, assuming there are a sufficient number of paid users, I can personally maintain a PRO account (the basic PRO account can only have 100 requests per day, suitable for personal use, creating a public account for multiple users requires additional paid upgrades and qualification verification).
-
-:::
+After completing the authorization, please close the authorization page in the browser.
 
 ## NewsBlur
 
@@ -75,6 +64,14 @@ Feedbin is a relatively new RSS service provider that supports basic RSS reading
 Typically, Feedbin has its own official sources, which are fast and stable.
 
 However, if you have your own deployed Feedbin, you can replace the server with your API address.
+
+## Miniflux
+
+Miniflux is a minimalist self-hosted RSS service.
+
+Similar to [Google Reader](#google-reader), you need to fill in the server address, username, and password.
+
+The application uses the `Basic` authorization method to call the Miniflux service API, so it will locally store your username and password.
 
 ## Unsupported Platforms
 

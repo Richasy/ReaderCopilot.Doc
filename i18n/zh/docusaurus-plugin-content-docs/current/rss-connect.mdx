@@ -13,18 +13,19 @@ import gReaderAuth from "./img/greader_auth.png";
 - [Inoreader](https://www.inoreader.com)
 - [NewsBlur](https://www.newsblur.com)
 - [Feedbin](https://feedbin.com)
+- [Miniflux](https://miniflux.app)
 
 ## 本地管理
 
 本地管理最为方便，不需要额外授权，应用将会在阅读库中创建 RSS 缓存。
 
-在刷新的订阅源的时候，旧的文章不会被删除，而是会一直保留。
+在刷新订阅源的时候，旧的文章不会被删除，而是会一直保留。
 
 可以通过将阅读库放置在如 OneDrive 等本地云盘中以实现跨设备同步。
 
 ## Google Reader
 
-Google Reader 已经停运，但是 Google Reader API 作为一种协议却被多种 RSS 平台使用，典型的如 FreshRSS，Inoreader 等。
+Google Reader 已经停运，但是 Google Reader API 作为一种协议却被多种 RSS 平台使用，典型的如 FreshRSS，TheOldReader 等。
 
 以 FreshRSS 举例。
 
@@ -38,25 +39,13 @@ Google Reader 已经停运，但是 Google Reader API 作为一种协议却被�
 
 ## Inoreader
 
-Inoreader 是一个在线 RSS 服务提供商，算是老牌服务了，质量稳定，但是近期已经开始约束第三方 API 的使用。
+Inoreader 是一个在线 RSS 服务提供商，算是老牌服务了，质量稳定。
 
-Inoreader 的 API 数据交互是一项付费功能，如果你已经是一位 PRO 用户，那么可以在 Inoreader 的 `偏好设置` -> `其它` -> `API 访问权限` 中创建自己的应用，然后将 `应用程序 ID` 和 `应用程序密钥` 填写到应用窗口中，
-接下来完成在浏览器中的授权步骤即可。
+应用继承了 **RSS 追踪** 的客户端令牌，获得了 Inoreader 官方的承认，将继续为 Windows 平台提供高质量的 Inoreader 集成服务。
 
-如果你是免费用户，也不是不能用。
+你可以在设置中切换到 Inoreader，点击 `连接` 按钮，应用会打开浏览器，你需要在浏览器中完成授权，浏览器会引导你再打开阅读助理，这样就完成授权了。
 
-Inoreader 提供了 PRO 试用的入口，你可以先进行两周的试用。在试用期间，你可以按照上面的步骤进行，以实现和 Inoreader 的同步。
-
-如果你之前已经使用了 PRO 的试用，那么目前来说，除非你愿意购买 Inoreader 的 PRO 套餐，不然只能导出成 OPML 之后，在阅读助理中使用本地模式阅读 RSS 了。
-
-:::tip
-
-这是目前的情况，但也有后续的计划：
-
-1. 如果阅读助理的反响不错，有比较多的用户倾向于使用 Inoreader，我会去和 Inoreader 协商，尽量争取一个应用名额。
-2. 如果第一条路不行，那么假设付费用户较多，我可以自掏腰包维护一个 PRO 账户（基础的 PRO 账户每天只能有 100 次请求，适合个人使用，做公开账户给多人使用需要额外升级付费，还需要验证资质）
-
-:::
+完成授权后，请关闭浏览器中的授权页面。
 
 ## NewsBlur
 
@@ -75,6 +64,14 @@ Feedbin 是一个较新的 RSS 服务提供商，API 支持基础的 RSS 阅读�
 通常来说，Feedbin 有自己的官方源，速度快且较为稳定。
 
 但是如果你有自己部署的 Feedbin，也可以将服务器替换为你的 API 地址。
+
+## Miniflux
+
+Miniflux 是一个极简的自部署 RSS 服务。
+
+和 [Google Reader](#google-reader) 类似，你需要填写服务器地址、用户名和密码。
+
+应用使用 `Basic` 授权方式调用 Miniflux 服务的 API，所以会在本地存储你的用户名和密码。
 
 ## 不支持的平台
 
