@@ -1,0 +1,111 @@
+---
+title: Connecting to Reading
+---
+
+import setting from "./img/plugin-config-setting.png";
+import dialog from "./img/plugin-config-dialog.png";
+
+## What is Reading?
+
+When we refer to "Reading" in this article, we are referring to two applications:
+
+1. [Legado](https://github.com/gedoor/legado)
+    Legado is a popular Android reading application with a rich community of book sources, loved by many online literature enthusiasts.
+2. [Reader Server Edition](https://github.com/hectorqin/reader)
+    This is a server version developed based on the open-source reading parser, which can be hosted on your own server to achieve cross-platform reading.
+
+## Why Connect to Reading?
+
+Legado has a massive collection of book sources provided by the community, not limited to online literature, but also including categories such as comics and audiobooks. It is the best choice for free reading in the Chinese community.
+
+There are many users, including myself, who use Legado. I don't want Reader Copilot to become an isolated island, but rather I hope it can exchange data with Legado, allowing users to switch between mobile reading and desktop reading conveniently and quickly.
+
+## How to Connect?
+
+Reader Copilot interacts with Reading through book source plugins.
+
+With the help of a "kind-hearted netizen", the default plugins of Reader Copilot support data interaction with "Legado" and "Reader Server" starting from version 1.0.1.
+
+:::tip
+To connect to Reading, make sure your Reader Copilot version is 1.2310.2.0 or above, and the [book source plugin](https://github.com/Richasy/ReaderCopilot.Public/releases) version is 1.2310.1.0 or above.
+:::
+
+After importing the book sources according to the instructions in the [Introduction to Book Sources](./book-source), you will see the "Plugin configuration" option in the settings.
+
+<img src={setting} width="400px" />
+
+Open the plugin configuration, where you will find three input fields:
+
+<img src={dialog} width="400px" />
+
+### Configuring Legado
+
+If you need to connect to the Legado Android app, you need to fill in the "Legado: Address" field.
+
+1. Open the Legado app on your phone.
+2. Go to "Mine" and open "Web Service."
+3. After successfully enabling it, enter the URL below the Web Service section (e.g., `http://192.168.2.1:1122`) into the "Legado: Address" field.
+
+Click "Confirm" to complete the configuration for the Legado Android app.
+
+### Configuring Reader Server
+
+If you need to connect to the Reader Server Edition, make sure you have deployed the [Reader Server Edition](https://github.com/hectorqin/reader). The deployment process will not be covered here.
+
+In Reader Copilot, you need to fill in the "hectorqin/reader: URL" and "hectorqin/reader: Access Token" fields.
+
+The URL is the address of your deployment, but please note that the server edition's homepage has a "#" suffix. For example, your bookshelf URL might look like this: `https://xxx.xxx.com/#/`
+
+**Do not include the "#" when filling in the "hectorqin/reader: URL" field!**
+
+Obtaining the access token is a bit more complicated because the server version has a multi-account mechanism. The application needs a token specific to a certain account to access the data under that account.
+
+After logging in on the web page, press "F12" to open the developer tools, switch to the console, enter `localStorage.api_token`, and press enter. The console will then print a string in the following format:
+
+```
+'Your Name:xxxxxxxxx'
+```
+
+You need to paste this string (excluding the single quotes at the beginning and end) into the "hectorqin/reader: Access Token" field.
+
+This completes the configuration for the Reader Server Edition.
+
+## How to Use
+
+After completing the above configuration, switch to the "Online Literature" page and click on the dropdown menu in the upper right corner of the book source. You will find the **Android Reading** or **Reader Server** book sources labeled as "Self-Deployed." Click on them to switch to the corresponding book source.
+
+:::tip
+When the configuration is not complete, the corresponding book sources will not appear in the list.
+
+If you have already loaded the book source list before configuring, you need to click the refresh button after modifying the configuration.
+:::
+
+### Bookshelf and Search
+
+After switching to the reading data source, the default display will be the books in your current bookshelf.
+
+When you try to search, it will only search for books that you have already added to your bookshelf, rather than using the search function of Reading itself.
+
+In other words, **searching for your favorite novels needs to be done within the Reading application**.
+
+Because Reader Copilot has its own book management mechanism and only performs simple data synchronization with Reading.
+
+So, in fact, your operation is equivalent to creating a shortcut in Reader Copilot that points to the book you are reading in the Reading application.
+
+### Record Synchronization
+
+#### Reader Copilot -> Reading
+
+When you read books from "Reading" in Reader Copilot, your reading progress will be sent to "Reading" every time you switch chapters, achieving record synchronization.
+
+However, since Reader Copilot does not record the specific location where you have read to in each chapter, when the record is synchronized, you will be at the beginning of the current chapter when you open the corresponding book in "Reading."
+
+#### Reading -> Reader Copilot
+
+When you have been reading in the Reading application for a while and want to continue reading on your desktop using Reader Copilot, you need to right-click on the corresponding book and select "Update Catalog" from the menu that appears.
+
+The application will re-read the book information and synchronize your reading progress locally.
+
+:::warning
+If you do not update, when you open the book, it will use the historical record saved when you last closed it, and it will also overwrite your mobile or server-side records through the API.
+:::

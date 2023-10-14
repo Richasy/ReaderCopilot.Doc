@@ -22,7 +22,7 @@ const sidebars = {
     {
       type: 'category',
       label: 'Book Reader',
-      items: ['import-txt', 'book-management', 'custom-reader', 'book-source', 'write-plugin']
+      items: ['import-txt', 'book-management', 'custom-reader', 'book-source', 'connect-legado', 'write-plugin']
     },
     {
       type: 'category',
