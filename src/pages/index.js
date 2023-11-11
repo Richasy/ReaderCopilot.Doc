@@ -103,8 +103,8 @@ function Home() {
               description={
                 <p>
                   <Translate id="home.ai.1">
-                    The Reader Copilot works closely with the Fantasy Copilot,
-                    you can configure your AI key in the Fantasy Copilot,
+                    The Reader Copilot works closely with the Richasy Assistant,
+                    you can configure your AI key in the Richasy Assistant,
                     and the Reader Copilot will be able to use the AI function to provide you with machine translation,
                     neural speech, semantic query and other functions
                   </Translate>

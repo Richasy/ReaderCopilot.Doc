@@ -7,48 +7,48 @@ import wordTranslate from "./img/word-translate.png";
 import ttsSetting from './img/tts-setting.png';
 import pdfCopilot from "./img/pdf-copilot.png";
 
-The AI features provided by Reader Copilot are currently powered by [Fantasy Copilot](https://www.microsoft.com/store/apps/9NB0NB3MLQTM). Therefore, if you want to experience AI features such as translation, text-to-speech, and chat while reading, the prerequisite is to install Fantasy Copilot.
+The AI features provided by Reader Copilot are currently powered by [Richasy Assistant](https://www.microsoft.com/store/apps/9NB0NB3MLQTM). Therefore, if you want to experience AI features such as translation, text-to-speech, and chat while reading, the prerequisite is to install Richasy Assistant.
 
-## What is Fantasy Copilot?
+## What is Richasy Assistant?
 
-[Fantasy Copilot](https://www.microsoft.com/store/apps/9NB0NB3MLQTM) is an AI application that I developed. It is **free** and **open-source**.
+[Richasy Assistant](https://www.microsoft.com/store/apps/9NB0NB3MLQTM) is an AI application that I developed. It is **free** and **open-source**.
 
 - Open-source repository: [Richasy/FantasyCopilot](https://github.com/Richasy/FantasyCopilot)
 
-Fantasy Copilot supports mainstream Open AI and Azure Open AI, and provides a rich AI integration experience.
+Richasy Assistant supports mainstream Open AI and Azure Open AI, and provides a rich AI integration experience.
 
 :::tip
 
-Fantasy Copilot itself is not an AI service. Various AI features used by the application need to be configured by the user (usually by entering an API key).
+Richasy Assistant itself is not an AI service. Various AI features used by the application need to be configured by the user (usually by entering an API key).
 
 :::
 
-In addition to providing basic AI experiences, I also plan to turn Fantasy Copilot into an AI core. Reader Copilot and [Bili Copilot](https://www.microsoft.com/store/apps/9MVFJLPH517M) are part of this plan.
+In addition to providing basic AI experiences, I also plan to turn Richasy Assistant into an AI core. Reader Copilot and [Bili Copilot](https://www.microsoft.com/store/apps/9MVFJLPH517M) are part of this plan.
 
 I want to create a "Copilot Toolkit" to explore the development path of AI applications.
 
-## How to Provide AI Services through Fantasy Copilot?
+## How to Provide AI Services through Richasy Assistant?
 
 :::tip
-Before connecting Fantasy Copilot, you must make sure that you already install the [.NET SDK](https://dotnet.microsoft.com/en-us/download/dotnet/7.0) on your device.
+Before connecting Richasy Assistant, you must make sure that you already install the [.NET SDK](https://dotnet.microsoft.com/en-us/download/dotnet/7.0) on your device.
 :::
 
-The AI features used in Reader Copilot, including translation, text-to-speech, and conversation, all have corresponding features in Fantasy Copilot.
+The AI features used in Reader Copilot, including translation, text-to-speech, and conversation, all have corresponding features in Richasy Assistant.
 
 There is a simple reason:
 
 > If you have already configured something in one application, why do you need to configure it again in another application?
 
-Therefore, Reader Copilot directly reads the configuration from Fantasy Copilot and provides AI services to users without launching Fantasy Copilot.
+Therefore, Reader Copilot directly reads the configuration from Richasy Assistant and provides AI services to users without launching Richasy Assistant.
 
-In other words, Fantasy Copilot serves as an additional configuration storage, and Reader Copilot reads the key information from the storage when needed.
+In other words, Richasy Assistant serves as an additional configuration storage, and Reader Copilot reads the key information from the storage when needed.
 
 However, in order to be responsible to users and to prevent this mechanism from being abused by other malicious applications, I have implemented some restrictions:
 
-1. When Reader Copilot reads the configuration from Fantasy Copilot for the first time, it needs to open Fantasy Copilot for authorization verification. After obtaining authorization, the application can read the key information. You can cancel the authorization for a specific application at any time in the settings page of Fantasy Copilot.
+1. When Reader Copilot reads the configuration from Richasy Assistant for the first time, it needs to open Richasy Assistant for authorization verification. After obtaining authorization, the application can read the key information. You can cancel the authorization for a specific application at any time in the settings page of Richasy Assistant.
    <img src={copilotAuth} height="200px" />
 
-2. Reader Copilot only holds the key configuration during the current application lifecycle and does not save the key information. The application only reads the configuration information from Fantasy Copilot when it calls the related AI features for the first time during the current lifecycle.
+2. Reader Copilot only holds the key configuration during the current application lifecycle and does not save the key information. The application only reads the configuration information from Richasy Assistant when it calls the related AI features for the first time during the current lifecycle.
 
 ## About Translation
 
@@ -77,7 +77,7 @@ On the other hand, Baidu Translate is not satisfactory in this aspect. Its docum
 >
 > <http://api.fanyi.baidu.com/doc/21>
 
-Therefore, the full text translation in RSS only supports Azure Translator. If you do not provide the corresponding configuration in Fantasy Copilot, you will not be able to use the full text translation feature.
+Therefore, the full text translation in RSS only supports Azure Translator. If you do not provide the corresponding configuration in Richasy Assistant, you will not be able to use the full text translation feature.
 
 :::tip
 

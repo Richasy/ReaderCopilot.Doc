@@ -130,7 +130,7 @@ const config = {
             title: 'Other apps',
             items: [
               {
-                label: 'Fantasy Copilot',
+                label: 'Richasy Assistant',
                 href: 'https://www.microsoft.com/store/apps/9NB0NB3MLQTM'
               },
               {

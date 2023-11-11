@@ -39,9 +39,9 @@
     "message": "Twitter",
     "description": "The label of footer link with label=Twitter linking to https://twitter.com/RichasyZhang"
   },
-  "link.item.label.Fantasy Copilot": {
+  "link.item.label.Richasy Assistant": {
     "message": "小幻助理",
-    "description": "The label of footer link with label=Fantasy Copilot linking to https://www.microsoft.com/store/apps/9NB0NB3MLQTM"
+    "description": "The label of footer link with label=Richasy Assistant linking to https://www.microsoft.com/store/apps/9NB0NB3MLQTM"
   },
   "link.item.label.Bili Copilot": {
     "message": "哔哩助理",
