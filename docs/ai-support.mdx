@@ -2,130 +2,142 @@
 title: AI Support
 ---
 
-import copilotAuth from './img/fantasy-copilot-auth.png';
+import semanticSearch from './img/semantic-search.png';
+import aoaiConfig from './img/aoai-config.png';
+import memoryUI from './img/memory-ui.png';
 import wordTranslate from "./img/word-translate.png";
 import ttsSetting from './img/tts-setting.png';
-import pdfCopilot from "./img/pdf-copilot.png";
 
-The AI features provided by Reader Copilot are currently powered by [Richasy Assistant](https://www.microsoft.com/store/apps/9NB0NB3MLQTM). Therefore, if you want to experience AI features such as translation, text-to-speech, and chat while reading, the prerequisite is to install Richasy Assistant.
+Currently, the AI support provided by the Reader Assistant includes:
 
-## What is Richasy Assistant?
+- Semantic search
+- Machine translation
+- Text-to-speech (TTS)
 
-[Richasy Assistant](https://www.microsoft.com/store/apps/9NB0NB3MLQTM) is an AI application that I developed. It is **free** and **open-source**.
+## Semantic Search
 
-- Open-source repository: [Richasy/FantasyCopilot](https://github.com/Richasy/FantasyCopilot)
+Semantic search refers to a knowledge-based question-answering robot built using large language models and vector databases. In the application, it is called "Memory", which means companion reading and secretary.
 
-Richasy Assistant supports mainstream Open AI and Azure Open AI, and provides a rich AI integration experience.
+Typically, when we want to find certain content in a book, we usually use keyword matching. However, this method is relatively inefficient as you still need to process the search results and organize the content yourself.
+
+But with the current popular knowledge base solutions, you can directly ask Shutong questions like `What are the features of the smartphones released by Microsoft?`
+
+If your document contains semantically related content, the robot will help you extract and organize information to generate an answer.
+
+<img src={semanticSearch} height="240px" />
+
+The Memory functionality is divided into two parts: the model part is responsible for text vectorization and text generation, and the storage part is responsible for storing the generated vector information. The following is a detailed introduction of each part.
+
+### Model Configuration
+
+The application has two built-in kernels: `Azure Open AI` and `Open AI`.
+
+These are two popular AI services, and you need to do some simple configuration by filling in the necessary access keys.
+
+<img src={aoaiConfig} height="260px" />
+
+After filling in the relevant information, the application will attempt to retrieve the deployed model list and provide options for selection. Please select the dialogue model and embedding model separately. The recommended combination is: `gpt-3.5-turbo` and `text-embedding-ada-002`.
+
+This completes the model configuration.
+
+#### Extend Models
+
+In addition to the two built-in services, advanced users (who can program) can also extend the service combination by using cutting-edge open-source models and then package them for import into the application.
+
+For information on how to package and example code, please refer to [Extend Services](./extra-service).
+
+### Configuration Storage
+
+Since the generated content is in vector format, it is best to use a vector database to store the data.
+
+Currently, the application only supports Qdrant database.
+
+This database supports both self-deployment and managed deployment. For users who are new to this, it is recommended to use the official managed platform [Qdrant Cloud](https://qdrant.tech/documentation/cloud/quickstart-cloud/).
+
+After registration, you can use the free storage repository, which is sufficient for personal use.
+
+Once the deployment is complete, fill in the endpoint and API token in the application configuration.
+
+### Basic Usage
+
+Once the configuration is complete, using the Memory is very simple.
+
+First, on the Memory page, you need to import a document for the first time, and the robot will answer based on that document.
+
+The supported document formats are:
+
+- .txt
+- .pdf
+- .md
+- .doc
+- .docx
 
 :::tip
-
-Richasy Assistant itself is not an AI service. Various AI features used by the application need to be configured by the user (usually by entering an API key).
-
+The application only retrieves the text content inside the document and does not parse image content.
 :::
 
-In addition to providing basic AI experiences, I also plan to turn Richasy Assistant into an AI core. Reader Copilot and [Bili Copilot](https://www.microsoft.com/store/apps/9MVFJLPH517M) are part of this plan.
+In the interface, you need to enter the question in the top question box and press Enter to query.
 
-I want to create a "Copilot Toolkit" to explore the development path of AI applications.
+<img src={memoryUI} />
 
-## How to Provide AI Services through Richasy Assistant?
+## Machine Translation
 
-:::tip
-Before connecting Richasy Assistant, you must make sure that you already install the [.NET SDK](https://dotnet.microsoft.com/en-us/download/dotnet/7.0) on your device.
-:::
+Translation provides two built-in services: `Azure Translation` and `Baidu Translation`, which you need to configure in the settings page.
 
-The AI features used in Reader Copilot, including translation, text-to-speech, and conversation, all have corresponding features in Richasy Assistant.
+In the Reading Assistant, there are not many language options for translation. You can only translate the text into the current application language.
 
-There is a simple reason:
+In most cases, the translation needs while reading are to `translate unfamiliar language text into a language I understand`, rather than `I want to see what this text looks like when translated into another language`. Therefore, the translation options provided by the Reading Assistant are only to meet the basic need of `being able to understand`.
 
-> If you have already configured something in one application, why do you need to configure it again in another application?
-
-Therefore, Reader Copilot directly reads the configuration from Richasy Assistant and provides AI services to users without launching Richasy Assistant.
-
-In other words, Richasy Assistant serves as an additional configuration storage, and Reader Copilot reads the key information from the storage when needed.
-
-However, in order to be responsible to users and to prevent this mechanism from being abused by other malicious applications, I have implemented some restrictions:
-
-1. When Reader Copilot reads the configuration from Richasy Assistant for the first time, it needs to open Richasy Assistant for authorization verification. After obtaining authorization, the application can read the key information. You can cancel the authorization for a specific application at any time in the settings page of Richasy Assistant.
-   <img src={copilotAuth} height="200px" />
-
-2. Reader Copilot only holds the key configuration during the current application lifecycle and does not save the key information. The application only reads the configuration information from Richasy Assistant when it calls the related AI features for the first time during the current lifecycle.
-
-## About Translation
-
-Reader Copilot does not provide a wide range of language options for translation. You can only translate the text into the current application language.
-
-In most cases, the translation needs while reading are to "translate unfamiliar language text into a language I understand," rather than "I want to see what this text looks like when translated into another language." Therefore, the translation options provided by Reader Copilot are designed to meet the basic need of "being able to understand."
-
-The application provides word translation, which is suitable for all text reading scenarios (online books, EPUB, PDF, and RSS).
+The application provides a feature called "word translation", which is suitable for all text reading scenarios (online books, EPUB, PDF, and RSS).
 
 After selecting the text, right-click or long-press the screen to bring up the text selection menu, where you can find the text translation option. Click on it to translate.
+
 <img src={wordTranslate} height="200px" />
 
 ### Full Text Translation
 
-The full text translation feature is only available in the RSS reader. This feature is mainly designed for quickly translating non-native news/articles while reading.
+The full text translation feature is only available in RSS readers. This feature is designed for quick translation when reading non-native news/articles.
 
-We know that the content text in RSS is in HTML format, and translating HTML inevitably includes a lot of tags. This requires the translation service to not translate the content inside the tags, otherwise, the page will not be displayed correctly.
+We know that the content of RSS is in HTML format, so translating HTML inevitably includes a bunch of tags. This requires translation services to not translate the content within the tags, otherwise the page will not display correctly.
 
-In this regard, Azure Translator (Bing Translator) has done a good job and provides comprehensive support for webpage translation.
+In this regard, Azure Translator (Bing Translate) does a great job and provides full support for webpage translation.
 
-On the other hand, Baidu Translate is not satisfactory in this aspect. Its documentation also states that webpage translation is currently not supported:
+On the other hand, Baidu Translate is not satisfactory in this area, as stated in its documentation that webpage translation is currently not supported.
 
-> **If I need to translate the entire webpage, how can I preserve the tags inside angle brackets?**
+> **如果我需要翻译整个网页，尖括号内的标签无法原样输出，怎么办？**
 >
-> The translation API treats all incoming strings as translatable characters and cannot currently distinguish which parts need to be preserved as they are. Therefore, the API is not suitable for directly processing HTML files. You can preprocess the HTML file, extract the text to be translated, pass it to the API for translation, and then fill it back.
+> 翻译API会将传入的所有字符串当做可翻译字符，目前暂时无法区分哪些部分需原样保留，因此 API 不适合直接处理 HTML 文件。您可将 HTML 文件进行译前处理，抽取出待翻译文本，传入 API 翻译后再回填。
 >
 > <http://api.fanyi.baidu.com/doc/21>
 
-Therefore, the full text translation in RSS only supports Azure Translator. If you do not provide the corresponding configuration in Richasy Assistant, you will not be able to use the full text translation feature.
+Currently, full-text translation in RSS only supports Azure Translator. If you do not provide the corresponding configuration in the settings, you will not be able to use the full-text translation feature.
 
 :::tip
 
-To be honest, Azure Translation service is really cost-effective, and it even provides a free monthly quota of millions of words. It's like getting something for nothing.
+To be honest, Azure translation service is really affordable, and it even offers a free monthly quota of one million words. It's like getting something for nothing.
 
 :::
 
 ## About Text-to-Speech
 
-Windows itself provides an API for text-to-speech (TTS), which can be used for free and without limitations. However, the drawback is that the generated speech sounds robotic, which can be torturous when listening to it.
+Windows itself provides an API for text-to-speech, which can be used for free and without limitations. However, the drawback is that the generated speech sounds too robotic, making it torturous to listen to in certain cases.
 
-***Therefore, Reader Copilot does not support local TTS and instead utilizes Azure Speech Services for text-to-speech.***
+***Therefore, the Reading Assistant does not support local TTS. Instead, it utilizes Azure Speech Services for speech synthesis.***
 
-Azure Speech Services provides excellent AI voice effects. The Chinese voice "云希" that we often hear in short videos is from Azure.
+Azure Speech Services provides excellent AI-generated voices. The voice commonly heard in short videos saying "Attention! This man is called Xiaoshuai!" is the Chinese voice named "Yunxi" in Azure.
 
 It also supports local accents such as Henan dialect and Liaoning dialect. In the Chinese-speaking world, Azure Speech Services is the preferred choice for text-to-speech.
 
-Similar to translation, Reader Copilot provides the function of text-to-speech for all text reading scenarios. You can use this function to learn the pronunciation of some words.
+Similar to translation, the Reading Assistant provides the feature of reading selected text in all reading scenarios. You can use this feature to learn the pronunciation of certain words.
 
-The application provides some settings for TTS. You can adjust the language and voice for text-to-speech in the settings at the top of the reader.
+The application provides some settings for TTS, allowing you to adjust the language and voice for speech synthesis in the settings at the top of the reader.
+
 <img src={ttsSetting} height="200px" />
 
-### Full Text-to-Speech
+### Full Text Reading
 
-The full text-to-speech feature is currently only available in the online reader and provides the function to automatically switch to the next chapter after reading. 
+Full text reading is currently only available in the online reader, and it provides the function of automatically switching to the next chapter after reading is completed.
 
-In order to reduce the waiting time for speech generation, the application divides the text into natural paragraphs, generates speech for two paragraphs at a time, and plays one while preparing the next. When the previous paragraph finishes, the next paragraph starts playing. During playback, the application generates the next segment of speech content.
+In order to reduce the waiting time for speech generation, the application will divide the text into natural paragraphs and generate speech for two paragraphs at a time. One paragraph is used for playback, while the other is prepared. When the first paragraph finishes playing, the next paragraph is seamlessly connected, and speech generation for the next paragraph occurs during playback.
 
-The benefits of this approach are obvious. It takes care of the user experience while reducing costs. If you don't want to listen anymore, you can stop at any time without worrying about wasting the content that follows (at most one segment of speech).
-
-## About AI Conversation
-
-With the popularity of ChatGPT, AI applications associated with it have emerged in traditional application fields, injecting fresh blood into them.
-
-Inspired by ChatPDF, I have also integrated ChatGPT into Reader Copilot, with PDF reading being the preferred use case.
-
-Considering the specific use cases of PDF, many academic papers or materials are stored in PDF format (often long and difficult to understand), which requires a stronger demand for AI conversation indexing.
-
-<img src={pdfCopilot} height="600px" />
-
-The basic principle of this feature is to extract all the text from the PDF, convert it into vectors in segments, and then compare the cosine similarity between your question (also converted into a vector) and the context to find the most relevant context. The context and your question are then sent to ChatGPT to obtain a rigorous answer.
-
-However, this feature also has limitations:
-
-1. A considerable portion of PDFs are scanned copies, essentially images instead of selectable text. In this case, unless OCR is used, they cannot be parsed.
-2. Many PDFs do not have table of contents information, making it difficult to match the retrieved context with the original chapters, making it hard to locate.
-3. Some content in PDFs needs typesetting to be better understood (such as grids and data charts). Directly extracting text may cause misunderstandings.
-
-Therefore, the current feature can only provide simple question-and-answer functionality and does not yet offer clear semantic search capabilities.
-
-Due to these limitations, the built-in conversation feature may not be suitable for some users. Therefore, the application provides a setting where you can hide the assistant in the settings page, out of sight, out of mind.
+The benefits of this approach are obvious. It not only takes care of the user experience but also reduces costs. If you don't want to listen anymore, you can stop at any time without worrying about wasting the remaining content (at most, one paragraph of speech).
