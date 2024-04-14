@@ -4,4 +4,19 @@ title: Extra Service
 
 ## Example code for ChatGLM3 + BGE
 
-TBD
+[examples/kernel/ChatGLM_BGE](https://github.com/Richasy/ReaderCopilot.Public/tree/main/examples/kernel/ChatGLM_BGE)
+
+## Fundamental
+
+Extension services are essentially not limited to programming languages. Its main working principles are as follows:
+
+1. It needs to start a local Web service and expose the specified API interface.
+2. The paths of the API interfaces are `/v1/models`, `v1/chat/completions` and `v1/embeddings`
+3. Taking OpenAI’s return interface as the standard, the return results of the above interface are the same as those of OpenAI.
+4. When the local service starts, a message `{ "status": 0, "message": "Success message" }` should be printed. If it fails, a message `{ "status": 1, "message": "Failed" }`
+
+In the sample code, BGE is used as the text embedding model and ChatGLM3 is used as the chat model to jointly build this set of knowledge base-driven extensions based on the local model.
+
+## More examples
+
+In the future, C# will be used to integrate online services, but it is not sure whether it will be provided in the form of a plug-in or a built-in form.

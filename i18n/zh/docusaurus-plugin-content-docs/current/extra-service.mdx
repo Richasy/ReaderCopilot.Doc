@@ -4,4 +4,19 @@ title: 扩展服务
 
 ## ChatGLM3 + BGE 的示例代码
 
-施工中
+[examples/kernel/ChatGLM_BGE](https://github.com/Richasy/ReaderCopilot.Public/tree/main/examples/kernel/ChatGLM_BGE)
+
+## 基本原理
+
+扩展服务本质上是不限制编程语言的，它主要的工作原理如下：
+
+1. 它需要启动一个本地的 Web 服务，并暴露指定的 API 接口。
+2. API 接口的路径分别是 `/v1/models`, `v1/chat/completions` 和 `v1/embeddings`
+3. 以 OpenAI 的返回接口为标准，上述接口的返回结果与 OpenAI 相同。
+4. 在本地服务启动时，应该打印一条信息 `{ "status": 0, "message": "Success message" }`，如果失败，则打印 `{ "status": 1, "message": "Failed message" }`
+
+在示例代码中，使用了 BGE 作为文本嵌入模型，ChatGLM3 作为对话模型，共同构建了这套基于本地模型的知识库驱动扩展。
+
+## 更多示例
+
+后续会采用 C# 进行在线服务的集成，但不确定是以插件的形式还是内置的形式提供。
